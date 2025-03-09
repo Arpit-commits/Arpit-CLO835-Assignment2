@@ -19,7 +19,7 @@ spec:
         - name: ecr-secret
       containers:
         - name: flask-app
-          image: 135893829551.dkr.ecr.us-east-1.amazonaws.com/flask:v1.0
+          image: 135893829551.dkr.ecr.us-east-1.amazonaws.com/flask:v2.0
           env:
             - name: DBHOST
               value: "sql-service.sql.svc.cluster.local"
