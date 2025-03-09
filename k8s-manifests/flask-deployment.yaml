@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+  namespace: flask
+  labels:
+    app: employees
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret
+      containers:
+        - name: flask-app
+          image: 135893829551.dkr.ecr.us-east-1.amazonaws.com/flask:v1.0
+          env:
+            - name: DBHOST
+              value: "sql-service.sql.svc.cluster.local"
+            - name: DBPORT
+              value: "3306"
+            - name: DBUSER
+              value: "root"
+            - name: DBPWD
+              value: "pw"
+            - name: APP_COLOR
+              value: "blue"
+          ports:
+            - containerPort: 8080

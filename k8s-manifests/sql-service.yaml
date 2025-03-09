@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sql-service
+  namespace: sql
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306    # ClusterIP port
+      targetPort: 3306 # Container port
+  type: ClusterIP  # Internal service only

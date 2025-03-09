@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask-pod
+  namespace: flask
+  labels:
+    app: employees
+spec:
+  imagePullSecrets:
+    - name: ecr-secret
+  containers:
+    - name: flask-pod
+      image: 135893829551.dkr.ecr.us-east-1.amazonaws.com/flask:v1.0
+      env:
+        - name: DBHOST
+          value: "sql-service.sql.svc.cluster.local"
+        - name: DBPORT
+          value: "3306"
+        - name: DBUSER
+          value: "root"
+        - name: DBPWD
+          value: "pw"
+        - name: APP_COLOR
+          value: "blue"
+      resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
