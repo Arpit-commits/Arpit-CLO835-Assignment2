@@ -1,0 +1,18 @@
+Error Report Summary
+
+1 . ECR Image Not Getting Uploaded
+o	Problem: I couldn't send my container image to AWS ECR, which stopped the workflow.
+o	Solution: I checked and fixed my AWS configuration and credentials, making sure the image could be uploaded properly.
+2.	Pods Experiencing ECR Pull Issues
+o	Problem: My pods were having trouble downloading the image from ECR, which led to errors during deployment.
+o	Solution: I updated the authentication settings (image pull secrets) so the pods could access and pull the image without any issues.
+3.	IP Not Forwarding to Port 30000
+o	Problem: The expected traffic wasn't reaching port 30000, causing connection problems.
+o	Solution: I adjusted the security group settings to open the necessary inbound rule, which allowed the IP to correctly forward traffic to port 30000.
+4.	Missing kind-config File
+o	Problem: The configuration file needed to set up my local Kubernetes cluster (kind) was missing, so the cluster couldn't start properly.
+o	Solution: I created the required kind-config file with the right settings, which allowed the local cluster to initialize and run smoothly.
+5.	Curl Not Working Inside the Pod
+o	Problem: The curl command wasn't available inside the pod, making it difficult to test connectivity and diagnose issues.
+o	Solution: I manually installed the curl package in the pod, enabling me to perform the necessary tests and troubleshoot effectively.
+
