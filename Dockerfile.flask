@@ -1,12 +1,25 @@
-RUN apt-get update -y
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Update package lists and install dependencies
+RUN apt-get update -y && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the current directory contents into the container at /app
 COPY . /app
+
+# Set the working directory to /app
 WORKDIR /app
-RUN set -xe \
-    && apt-get update -y \
-    && apt-get install -y python3-pip \
-    && apt-get install -y mysql-client 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port 8080 for the Flask app
 EXPOSE 8080
-ENTRYPOINT [ "python3" ]
-CMD [ "app.py" ]
+
+# Define environment variable to ensure Flask runs in production mode
+ENV FLASK_ENV=production
+
+# Command to run the Flask app
+CMD ["python", "app.py"]
