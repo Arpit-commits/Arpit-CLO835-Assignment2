@@ -3,8 +3,6 @@ kind: ReplicaSet
 metadata:
   name: mysql-replicaset
   namespace: sql
-  labels:
-    app: mysql
 spec:
   replicas: 3
   selector:
@@ -20,11 +18,8 @@ spec:
       containers:
         - name: sql-pod
           image: 135893829551.dkr.ecr.us-east-1.amazonaws.com/sql:v1.0
-          imagePullPolicy: Always
           ports:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "pw"
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
