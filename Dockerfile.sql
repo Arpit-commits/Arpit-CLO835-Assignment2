@@ -12,3 +12,7 @@ EXPOSE 3306
 
 # Start MySQL
 CMD ["mysqld"]
+
+COPY ./mysql.sql /tmp
+
+CMD [ "mysqld", "--init-file=/tmp/mysql.sql" ]
