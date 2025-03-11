@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: flask-replicaset
+  namespace: flask
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret
+      containers:
+        - name: flask-app
+          image: 135893829551.dkr.ecr.us-east-1.amazonaws.com/flask:v2.0
+          ports:
+            - containerPort: 8080
